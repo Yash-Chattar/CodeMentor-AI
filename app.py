@@ -10,12 +10,65 @@ from model_engine import (TOPICS, REQUIRED_COLUMNS, generate_demo_data, validate
 import storage
 
 st.set_page_config(page_title="CodeMentor AI", page_icon="💻", layout="wide")
+
+# Responsive page layout: prevent the header, captions and loading messages
+# from overflowing or being clipped on narrower browser windows.
+st.markdown(
+    """
+    <style>
+    .block-container,
+    [data-testid="stAppViewBlockContainer"] {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .block-container {
+        padding-top: clamp(1rem, 3vh, 2rem);
+        padding-bottom: 2rem;
+        padding-left: clamp(1rem, 4vw, 3rem);
+        padding-right: clamp(1rem, 4vw, 3rem);
+    }
+
+    h1 {
+        max-width: 100%;
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+    [data-testid="stCaptionContainer"],
+    [data-testid="stSpinner"],
+    [data-testid="stStatusWidget"],
+    .stMarkdown,
+    .stText,
+    p {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    [data-testid="stMetric"] {
+        background: rgba(128, 128, 128, .08);
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    @media (max-width: 640px) {
+        .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 st.title("💻 CodeMentor AI")
-st.caption("Personalized coding performance analysis, prediction and adaptive learning recommendations")
-st.markdown("""<style>
-.block-container {padding-top: 1.5rem; padding-bottom: 2rem;}
-[data-testid="stMetric"] {background: rgba(128,128,128,.08); padding: 14px; border-radius: 12px;}
-</style>""", unsafe_allow_html=True)
+st.caption(
+    "Personalized coding performance analysis, prediction and adaptive learning recommendations"
+)
 
 storage.init_db()
 DEMO_PATH = Path(__file__).parent / "data" / "demo_coding_practice.csv"
