@@ -8,12 +8,15 @@
 - Compared Logistic Regression, Random Forest, balanced Random Forest, Extra Trees, Gradient Boosting and ANN (MLP).
 - Regression models forecast next week's accuracy and are compared with a persistence baseline.
 
-## Setup
+## Setup with uv
 ```powershell
-py -m venv .venv
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+uv sync
+uv run streamlit run app.py
+```
+
+Or manual venv activation:
+```powershell
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
 streamlit run app.py
 ```
 

@@ -19,8 +19,9 @@ class ModelEngineTests(unittest.TestCase):
         self.assertEqual(result.loc[0, "problems_solved"], 4)
         self.assertAlmostEqual(result.loc[0, "accuracy"], 400/6)
 
-    def test_accuracy_is_not_a_classifier_input(self):
-        self.assertNotIn("accuracy", CLASS_FEATURES)
+    def test_target_is_not_a_classifier_input(self):
+        self.assertNotIn("next_accuracy", CLASS_FEATURES)
+        self.assertNotIn("next_category", CLASS_FEATURES)
 
     def test_demo_model_pipeline(self):
         raw = pd.read_csv("data/demo_coding_practice.csv")
